@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Usuario</title>
+</h:head>
+
+<h:body>
+
+
+	<h:form id="form">
+	<h:panelGrid columns="2">
+			<f:facet name="caption">
+				<h:outputText value="Cadastro de Usuario" />
+			</f:facet>
+			
+	<h:outputLabel value="Nome: " for="nome"/>
+			<p:inputText id="nome"
+			  value="#{usuarioBean.usuario.nome}" label="Nome"
+				style="width:350px" />
+				
+	<h:outputLabel value="Idade: " for="idade" />
+			<p:inputText id="idade"
+			  value="#{usuarioBean.usuario.idade}" label="Idade"
+				style="width:350px" />
+	
+	<h:outputLabel value="CPF: " for="id_cpf" />
+			<p:inputText id="id_cpf"
+			  value="#{usuarioBean.usuario.id_cpf}" label="CPF"
+				style="width:350px" />
+	
+	<h:outputLabel value="Endereco: " for="endereco"  />
+			<p:inputText id="endereco"
+			  value="#{usuarioBean.usuario.endereco}" label="Endereco"
+				style="width:350px" />
+				
+				
+	<h:outputLabel value="Renda Fixa " for="despesafixa"  />
+			<p:inputText id="despesas_fixas"
+			  value="#{usuarioBean.usuario.despesafixa}" label="despesafixa"
+				style="width:350px" />			
+				
+				
+
+
+	<p:commandButton id="btnAddBotao" value="Adicionar"
+				action="#{usuarioBean.addUsuario()}" update="form" />
+
+	
+	
+	</h:panelGrid>
+	
+		<p:dataTable id="dataTableUsuarios" var="usu" value="#{usuarioBean.usuarios}" border="1">
+			<p:column>
+				<f:facet name="header">Usuarios Cadastrados</f:facet>
+				<h:outputText value="#{usu.nome}"></h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Remover</f:facet>
+				<p:commandButton id="btnREMBotao" value="Remover"
+				action="#{usuarioBean.removeUsuario(usu.id_cpf)}" ajax="false" update="dataTableUsuarios"/>
+			</p:column>
+		</p:dataTable>
+	
+	</h:form>
+</h:body>
+</html>
+
+	

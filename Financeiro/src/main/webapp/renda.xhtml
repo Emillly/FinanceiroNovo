@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Renda</title>
+</h:head>
+
+<h:body>
+
+
+	<h:form id="form">
+	<h:panelGrid columns="2">
+			<f:facet name="caption">
+				<h:outputText value="Cadastre o valor total variavel do mês !" />
+			</f:facet>
+			
+	<h:outputLabel value="Despesa Variavel: " for="despesavariavel"/>
+			<p:inputText id="despesavariavel"
+			  value="#{variaveis.variaveisBean.despesavariavel}" label="despesavariavel"
+				style="width:350px" />
+				
+	<h:outputLabel value="Renda Variavel: " for="rendaVariavel" />
+			<p:inputText id="rendaVariavel"
+			  value="#{variaveis.variaveisBean.rendaVariavel}" label="rendaVariavel"
+				style="width:350px" />
+	
+	
+	<p:commandButton id="btnAddBotao" value="Adicionar"
+				action="#{variaveisBean.addVariaveis()}" update="form"  />
+	
+	</h:panelGrid>			
+				
+			<p:dataTable id="dataTableVariaveis" var="var" value="#{variaveisBean.variaveis}" border="1">
+			<p:column>
+			<f:facet name="header">Renda e despesas Variaveis do mês</f:facet>
+			<h:outputText value="#{var.despesavariavel}"></h:outputText>
+			</p:column>
+			<f:facet name="header">Remover</f:facet>
+				<p:commandButton id="btnREMBotao" value="Remover"
+				action="#{variaveisBean.removeDespesavariavel(var.despesavariavel)}" ajax="false" />
+			</p:column>
+		</p:dataTable>
+	
+		</h:form>
+</h:body>
+</html>
