@@ -6,7 +6,7 @@
 
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<non-jta-data-source>java:/financeiro18</non-jta-data-source>
+		<non-jta-data-source>java:/financeiroDS</non-jta-data-source>
 
 		<!-- entidade mapeada -->
 		<class>br.edu.ifpb.esperanca.daw2.financeiro.Usuario</class>
