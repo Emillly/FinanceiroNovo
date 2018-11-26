@@ -1,12 +1,18 @@
 package br.edu.ifpb.esperanca.daw2.financeiro;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @ViewScoped
 @Named
@@ -32,6 +38,23 @@ public class UsuarioBean implements Serializable{
 		getService().remove(entidade);
 		limpar();
 	}
+	
+	public boolean isUserInRole(String role) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		return externalContext.isUserInRole(role);
+	}
+	
+	public void efetuarLogout() throws IOException, ServletException {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		session.invalidate();
+		HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+		request.logout();
+		ec.redirect(ec.getApplicationContextPath());
+	}
+	
 
 	public Usuario getEntidade() {
 		return entidade;

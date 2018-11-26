@@ -13,7 +13,7 @@ public class Usuario implements Identificavel {
 	@Id
 	@GeneratedValue(generator="usuario_seq", strategy=GenerationType.SEQUENCE)
 	@SequenceGenerator(name="usuario_seq")
-	private Long id_cpf;
+	private Long id;
 
 	private String nome;
 	private int idade;
@@ -24,6 +24,7 @@ public class Usuario implements Identificavel {
 	private String username; 
 	private String password;
 	private String grupo;
+
 		
 	
 
@@ -77,12 +78,12 @@ public class Usuario implements Identificavel {
 	
 	@Override
 	public Long getId() {
-		return id_cpf;
+		return id;
 	}
 	
 	@Override
 	public void setId(Long id) {
-		this.id_cpf = id;
+		this.id = id;
 		
 	}
 
