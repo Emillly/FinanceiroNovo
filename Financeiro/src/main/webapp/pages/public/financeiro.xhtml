@@ -92,6 +92,12 @@
 				<f:facet name="header">Salario que Restou</f:facet>
 				<h:outputText value="#{usu.resultado}"></h:outputText>
 			</p:column>
+			
+			<p:column>
+				<f:facet name="header">username</f:facet>
+				<h:outputText value="#{usu.username}"></h:outputText>
+			</p:column>
+			
 
 			<p:column rendered="#{usuarioBean.isUserInRole('ADMIN')}">
 				<f:facet name="header">Opções</f:facet>

@@ -1,6 +1,8 @@
 package br.edu.ifpb.esperanca.daw2.financeiro;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,16 +21,31 @@ public class UserService implements Serializable, Service<Usuario>  {
 	private UsuarioDAO userDAO;
 	
 	/* (non-Javadoc)
-	 * @see br.edu.ifpb.esperanca.daw2.services.Service#save(br.edu.ifpb.esperanca.daw2.ifoto.entities.Usuario)
+	 * @see br.edu.ifpb.esperanca.daw2.services.Service#save(br.edu.ifpb.esperanca.daw2.financeiro.Usuario)
 	 */
 	@Override
 	@TransacionalCdi
 	public void save(Usuario user) {
+		user.setPassword(hash(user.getPassword()));
 		userDAO.save(user);
 	}
 
+		private String hash(String password) {
+		try {
+			MessageDigest md;
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes("UTF-8"));
+			byte[] digest = md.digest();
+			String output = Base64.getEncoder().encodeToString(digest);
+			return output;
+		} catch (Exception e) {
+			return password;
+		}
+	}
+
+
 	/* (non-Javadoc)
-	 * @see br.edu.ifpb.esperanca.daw2.services.Service#update(br.edu.ifpb.esperanca.daw2.ifoto.entities.Usuario, boolean)
+	 * @see br.edu.ifpb.esperanca.daw2.services.Service#update(br.edu.ifpb.esperanca.daw2.financeiro.Usuario, boolean)
 	 */
 	@Override
 	@TransacionalCdi

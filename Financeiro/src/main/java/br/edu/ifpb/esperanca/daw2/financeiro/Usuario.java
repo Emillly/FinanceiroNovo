@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 public class Usuario implements Identificavel {
@@ -19,7 +20,6 @@ public class Usuario implements Identificavel {
 	private int idade;
 	private float despesafixa;
 	private float salariofixo;
-	private float resultado;
 	private String endereco;
 	private String username; 
 	private String password;
@@ -27,14 +27,12 @@ public class Usuario implements Identificavel {
 
 		
 	
-
+	@Transient
 	public float getResultado() {
-		return resultado;
+		
+		return salariofixo-despesafixa;
 	}
 
-	public void setResultado(float resultado) {
-		this.resultado = resultado;
-	}
 
 	public float getSalariofixo() {
 		return salariofixo;
